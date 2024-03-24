@@ -13,11 +13,63 @@ groq_client = Groq(
     api_key=config('GROQ_API_KEY'),
 )
 
+COLOUR_PALETTES = {
+    "Bright Spring": {
+        "good_colours": ["#FF0000", "#FF4500", "#FF6347", "#FF7F50", "#FF8C00", "#FFA500", "#FFD700", "#FFA07A", "#FF69B4", "#FF1493", "#FFB6C1", "#FFC0CB", "#FF00FF", "#FF69B4", "#FF1493", "#FF4500", "#FF6347", "#FF7F50", "#FF8C00", "#FFA500", "#FFD700", "#FFA07A", "#FF69B4", "#FF1493"],
+        "bad_colours": ["#B0C4DE", "#A0B6CC", "#87CEEB", "#87CEFA", "#00BFFF", "#1E90FF", "#6495ED", "#F0E68C", "#FFFF00", "#FFD700", "#DAA520", "#B8860B", "#F0E68C", "#D3D3D3", "#B0C4DE", "#A0B6CC", "#87CEEB", "#87CEFA", "#00BFFF", "#1E90FF", "#6495ED", "#F0E68C", "#FFFF00", "#FFD700"],
+        "colour_explanation": "Good colors for a `Bright Spring` are bold and vibrant hues such as true reds, bright oranges, sunny yellows, and vivid greens, while bad colors are muted or cool tones like soft pastels, cool grays, and deep blues that can dull the overall appearance. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+    "Warm Spring": {
+         "good_colours": ["#FFD700", "#FFA500", "#DAA520", "#B8860B", "#F0E68C", "#FFD700", "#DAA520", "#B8860B", "#FFA07A", "#FF7F50", "#FF6347", "#FF4500", "#228B22", "#008000", "#556B2F", "#8B4513", "#A0522D", "#D2691E", "#8B0000", "#B22222", "#CD5C5C", "#FF0000", "#DC143C", "#FF4500"],
+        "bad_colours": ["#87CEEB", "#87CEFA", "#00BFFF", "#1E90FF", "#6495ED", "#4682B4", "#5F9EA0", "#191970", "#4169E1", "#00CED1", "#20B2AA", "#008B8B", "#008080", "#00FFFF", "#00FFFF", "#008000", "#32CD32", "#00FF00", "#ADFF2F", "#7FFF00", "#ADFF2F", "#FFFF00", "#FFFF00", "#FFD700"],
+        "colour_explanation": "Good colors for a `Warm Spring` are warm and vibrant shades such as golden yellows, warm oranges, rich greens, and earthy browns, while bad colors are cool or muted tones like icy blues, cool grays, and deep purples that can clash with the warm undertones of the skin and hair. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+    "Light Spring": {
+        "good_colours": ["#FFFACD", "#FAFAD2", "#FFD700", "#F0E68C", "#FFA07A", "#FF7F50", "#FF6347", "#FF4500", "#FF69B4", "#FF1493", "#FFC0CB", "#FFB6C1", "#FF69B4", "#FF1493", "#FFC0CB", "#FFB6C1", "#FF69B4", "#FF1493", "#FFC0CB", "#FFB6C1", "#FF6347", "#FFDAB9", "#FFE4B5", "#FFDEAD", "#FFE4C4"],
+        "bad_colours": ["#87CEEB", "#87CEFA", "#00BFFF", "#1E90FF", "#6495ED", "#4682B4", "#5F9EA0", "#191970", "#4169E1", "#00CED1", "#20B2AA", "#008B8B", "#008080", "#00FFFF", "#00FFFF", "#008000", "#32CD32", "#00FF00", "#ADFF2F", "#7FFF00", "#ADFF2F", "#FFFF00", "#FFFF00", "#FFD700", "#FFA500"],
+        "colour_explanation": "Good colors for a `Light Spring` are warm and fresh shades such as soft peach, warm yellows, light corals, and soft greens, while bad colors are overly cool or dark tones like deep blues, harsh blacks, and cool grays that can wash out the warm undertones of the skin and hair. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+    "Light Summer": {
+        "good_colours": ["#B0C4DE", "#87CEEB", "#87CEFA", "#00BFFF", "#1E90FF", "#6495ED", "#AFEEEE", "#ADD8E6", "#F0F8FF", "#E0FFFF", "#D3D3D3", "#C0C0C0", "#FFC0CB", "#FFB6C1", "#FF69B4", "#FF1493", "#FFC0CB", "#FFB6C1", "#FF69B4", "#FF1493", "#FFC0CB", "#FFB6C1", "#FF69B4", "#FF1493", "#FFC0CB"],
+        "bad_colours": ["#FFA500", "#FF4500", "#FF0000", "#DC143C", "#8B0000", "#FFD700", "#FFA500", "#FF4500", "#FF0000", "#DC143C", "#8B0000", "#FFD700", "#FFA500", "#FF4500", "#FF0000", "#DC143C", "#8B0000", "#FFD700", "#FFA500", "#FF4500", "#FF0000", "#DC143C", "#8B0000", "#FFD700", "#FFA500"],
+        "colour_explanation": "Good colors for a `Light Summer` are soft and delicate hues such as soft blues, muted pinks, soft lavenders, and light grays, while bad colors are overly warm or intense tones like bright oranges, deep blacks, and overly saturated hues that can overpower the softness of the skin and hair tones. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+    "Cool Summer": {
+        "good_colours": ["#AFEEEE", "#B0E0E6", "#87CEEB", "#6495ED", "#4682B4", "#5F9EA0", "#ADD8E6", "#B0C4DE", "#778899", "#AFEEEE", "#B0E0E6", "#87CEEB", "#6495ED", "#4682B4", "#5F9EA0", "#ADD8E6", "#B0C4DE", "#778899", "#87CEFA", "#00BFFF", "#1E90FF", "#87CEFA", "#00BFFF", "#1E90FF", "#87CEFA"],
+        "bad_colours": ["#FF4500", "#FF0000", "#DC143C", "#B22222", "#FF69B4", "#FF1493", "#FFC0CB", "#FFD700", "#FFA500", "#DAA520", "#B8860B", "#FF4500", "#FF0000", "#DC143C", "#B22222", "#FF69B4", "#FF1493", "#FFC0CB", "#FF69B4", "#FF1493", "#FFC0CB", "#FFD700", "#FFA500", "#DAA520", "#B8860B"],
+        "colour_explanation": "Good colors for a `Cool Summer` are soft and cool tones such as soft blues, soft pinks, cool grays, and soft purples, while bad colors are warm or overly vibrant hues like warm oranges, bright yellows, and harsh blacks that can clash with the cool undertones of the skin and hair. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+    "Soft Summer": {
+        "good_colours": ["#B0C4DE", "#A0B6CC", "#87CEEB", "#778899", "#6C7B8B", "#708090", "#D8BFD8", "#E6E6FA", "#C0C0C0", "#A9A9A9", "#D3D3D3", "#BC8F8F", "#DA70D6", "#9370DB", "#DDA0DD", "#A0522D", "#CD853F", "#BC8F8F", "#F4A460", "#CD853F", "#D2691E", "#8B4513", "#F5DEB3", "#FAEBD7", "#FFE4B5", "#FFDEAD", "#FFDAB9", "#FFE4C4", "#FFA07A", "#FF8C00", "#DAA520", "#B8860B", "#FFF8DC", "#F0E68C"],
+        "bad_colours": ["#FFA500", "#FF4500", "#8B0000", "#FF0000", "#DC143C", "#FFD700", "#FFA500", "#FF4500", "#8B0000", "#FF0000", "#DC143C", "#FFD700", "#FFA500", "#FF4500", "#8B0000", "#FF0000", "#DC143C", "#FFD700", "#6B8E23", "#556B2F", "#808000", "#2F4F4F", "#8B4513", "#A52A2A", "#800000", "#CD5C5C", "#FF0000", "#DC143C", "#B22222", "#FF6347", "#FF4500", "#FF8C00", "#FFA500", "#D2691E", "#FFA07A"],
+        "colour_explanation": "Good colors for a `Soft Summer` are muted and cool tones such as soft blues, dusty roses, cool grays, and soft lavenders, while bad colors are overly warm or intense hues like bright oranges, warm reds, and harsh blacks that can overpower the softness of the skin and hair tones. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+    "Bright Winter": {
+         "good_colours": ["#FF0000", "#0000FF", "#00FFFF", "#008080", "#00FF7F", "#7FFFD4", "#20B2AA", "#00BFFF", "#00CED1", "#4682B4", "#6A5ACD", "#800080", "#8A2BE2", "#BA55D3", "#FF1493", "#FF69B4", "#FF4500", "#FFA500", "#FFD700", "#DAA520", "#F0E68C", "#B8860B", "#D2B48C", "#808000", "#008000"],
+        "bad_colours": ["#FFC0CB", "#FFA07A", "#FFDAB9", "#FFE4C4", "#FFDEAD", "#FFFF00", "#FFD700", "#FFA500", "#DAA520", "#B8860B", "#F0E68C", "#EEE8AA", "#F5DEB3", "#FFC0CB", "#FFA07A", "#FFDAB9", "#FFE4C4", "#FFDEAD", "#FFFF00", "#FFD700", "#FFA500", "#DAA520", "#B8860B", "#F0E68C", "#EEE8AA"],
+        "colour_explanation": "Good colors for a `Bright Winter` are vibrant and bold hues such as true reds, electric blues, emerald greens, and hot pinks, while bad colors are soft or muted tones like pastels, earthy browns, and warm neutrals that can appear washed out against the strong contrast of the skin and hair. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+    "Cool Winter": {
+        "good_colours": ["#0000FF", "#00008B", "#4169E1", "#6A5ACD", "#800080", "#8A2BE2", "#483D8B", "#4B0082", "#9370DB", "#7B68EE", "#4682B4", "#87CEEB", "#00BFFF", "#1E90FF", "#6495ED", "#B0C4DE", "#87CEFA", "#AFEEEE", "#8A2BE2", "#800080"],
+        "bad_colours": ["#8B4513", "#A52A2A", "#CD5C5C", "#FF0000", "#DC143C", "#B22222", "#FF6347", "#FF4500", "#FF8C00", "#FFA500", "#D2691E", "#FFA07A", "#FF7F50", "#FF69B4", "#FFC0CB", "#FFDAB9", "#FFE4C4", "#FFDEAD", "#FFD700", "#FFA500"],
+        "colour_explanation": "Good colors for a `Cool Winter` are jewel tones and icy shades such as sapphire blues, emerald greens, magenta pinks, and cool grays, while bad colors are warm or muted tones like earthy browns, warm oranges, and soft pastels that can clash with the cool undertones of the skin and hair. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+    "Deep Winter": {
+        "good_colours": ["#00008B", "#0000FF", "#1E90FF", "#4169E1", "#000080", "#483D8B", "#8A2BE2", "#800080", "#4B0082", "#8B0000", "#B22222", "#FF0000", "#DC143C", "#008000", "#2E8B57", "#006400", "#008000", "#228B22"],
+        "bad_colours": ["#87CEEB", "#87CEFA", "#00BFFF", "#1E90FF", "#6495ED", "#4682B4", "#5F9EA0", "#191970", "#4169E1", "#00CED1", "#20B2AA", "#008B8B", "#008080", "#00FFFF", "#008000", "#32CD32", "#00FF00", "#ADFF2F", "#7FFF00", "#FFFF00", "#FFD700", "#FFA500"],
+        "colour_explanation": "Good colors for a `Deep Winter` are bold and rich shades such as deep blues, true reds, emerald greens, and royal purples, while bad colors are soft or muted tones like pastels, warm neutrals, and subdued hues that can appear washed out against the strong contrast of the skin and hair. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+    "Soft Autumn": {
+        "good_colours": ["#D2B48C", "#BC8F8F", "#DEB887", "#CD853F", "#D2691E", "#8B4513", "#F4A460", "#FFDAB9", "#FFE4C4", "#FFA07A", "#FF8C00", "#DAA520", "#B8860B", "#F5DEB3", "#FAEBD7"],
+        "bad_colours": ["#4169E1", "#0000FF", "#00008B", "#000080", "#696969", "#808080", "#708090", "#A9A9A9", "#2F4F4F", "#D3D3D3", "#778899", "#B0C4DE", "#B0E0E6", "#ADD8E6", "#87CEEB", "#87CEFA", "#00BFFF", "#1E90FF", "#6495ED", "#4682B4", "#5F9EA0", "#191970", "#6A5ACD", "#483D8B", "#7B68EE"],
+        "colour_explanation": "Good colors for a `Soft Autumn` are warm and muted shades such as soft olive greens, warm beiges, soft browns, and warm grays, while bad colors are overly cool or bright tones like deep blues, harsh blacks, and neon shades that can clash with the warm undertones of the skin and hair. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    },
+}
+
 
 st.set_page_config(
     page_title='Seasonal Colour Analysis',
     page_icon='🎨',
-    # layout='wide',
     initial_sidebar_state='collapsed'
 )
 
@@ -49,20 +101,20 @@ if eye_colour is None or hair_colour is None or skin_tone is None or vein_colour
     st.stop()
 
 colour_analysis_prompt = """
-You are an expert at doing seasonal colour analysis for people. They will tell you their eye colour, hair colour, skin tone, and vein colour, and you will tell them their seasonal colour palette and show 25 diverse examples (don't have them be too similar) of good and bad colours for that palette.
+You are an expert at doing seasonal colour analysis for people. They will tell you their eye colour, hair colour, skin tone, and vein colour, 
+and you will tell them their seasonal colour palette (see options below) and an explanation as to why you assigned this colour palette.
+
+Here are the palette options: ["Bright Spring", "Warm Spring", "Light Spring", "Light Summer", "Cool Summer", "Soft Summer", "Bright Winter", "Cool Winter", "Deep Winter", "Soft Autumn"]
 
 Here's an example of what your output will look like:
 "{
     "season_explanation": "Based on the information provided (blue eyes, blonde hair, blue veins, and fair skin), you fall into the `Cool Summer` category for your seasonal color analysis.",
-    "season": "Cool Summer ☀️",
-    "good_colours: ["#AFD5D1", "#A7C7C3", "#A6C9D4", "#B9D1C8", "#AFC8D7", "#AFB6BB", "#C4C9CD", "#CED0CD", "#B8C5C8", "#A7BCC4", "#ABC4C4", "#B5C7C8", "#BACAC7", "#B7C4C8", "#AEBDBE", "#A9C6C5", "#BBC6C8", "#A3B9BF", "#A5BBBF", "#ADC2C2", "#ABC0BF", "#9FAEB3", "#B8C2C4", "#B3B9BB", "#B3BDBE"],
-    "bad_colours":  ["#FF0000", "#FFA500", "#FFFF00", "#008000", "#0000FF", "#800080", "#000000", "#FFFFFF", "#FFC0CB", "#FF69B4", "#FFD700", "#4B0082", "#800000", "#808080", "#C0C0C0", "#800080", "#00FFFF", "#00FF00", "#FFFF99", "#FFB6C1", "#FF6347", "#6A5ACD", "#8A2BE2", "#FF4500", "#FF00FF"],
-    'colour_explanation": "Good colors for Cool Summer include cool-toned hues like soft blues, muted pinks, lavender, and cool greens, characterized by soft, muted, and slightly dusty qualities, while bad colors encompass warm-toned hues such as yellows, oranges, and warm browns, along with bright, highly saturated colors and vibrant neon shades, which clash with cool undertones and may create an unbalanced look. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colors make you feel confident and beautiful!"
+    "season": "Cool Summer"
 }"
 
-Format your explanations nicely in markdown and feel free to use emojis to make it more fun! 🎨
 It's important you output the information in the correct python dict format (so I can call eval() on the output without errror), as shown above, or everything will break.
-Ensure your output has these exact keys ("season_explanation", "season", "good_colours", "bad_colours", "colour_explanation") in the dictionary - otherwise the application will break.
+Ensure your output has these exact keys ("season_explanation", "season") in the dictionary - otherwise the application will break.
+Do not return any text before or after the python dict.
 """
 
 def get_user_input_messages(eye_colour, hair_colour, skin_tone, vein_colour):
@@ -125,10 +177,7 @@ def get_seasonal_colour_pallette(eye_colour, hair_colour, skin_tone, vein_colour
             "role": "assistant",
             "content": """{
                 "season_explanation": "Based on the information you provided, it sounds like you have cool-toned features, with blue eyes, blonde hair, fair skin, and blue veins. This would suggest that you are a cool-toned individual, and I would recommend exploring the `Winter` and `Summer` seasons. Based on your fair skin and blue veins, I would recommend the `Light Summer` sub-season within the Summer season. `Light Summer` individuals have a muted, soft, and delicate colouring, with a cool undertone. They typically have light blonde, light brown, or strawberry blonde hair, fair skin, and blue or green eyes.",
-                "season": "Light Summer ☀️",
-                "good_colours": ["#B8D9C8", "#AACDBE", "#C9E5E2", "#C1D5E0", "#D5E3E9", "#E1D7DB", "#F1E3E4", "#F4F2F3", "#DDD0C7", "#D6CEB1", "#B0BFBF", "#A8B2B2", "#DFD1CA", "#B7C9A3", "#B4C3C2", "#A6A6A6", "#F0E7D8", "#F7EFE2", "#E0DDD6", "#BEB3A9", "#D6E0CD", "#E5E1E0", "#E7E2D9", "#E2E1D8"],
-                "bad_colours": ["#FF0000", "#FFA500", "#FFFF00", "#008000", "#0000FF", "#800080", "#000000", "#FFFFFF", "#FFC0CB", "#FF69B4", "#FFD700", "#4B0082", "#800000", "#808080", "#C0C0C0", "#800080", "#00FFFF", "#00FF00", "#FFFF99", "#FFB6C1", "#FF6347", "#6A5ACD", "#8A2BE2", "#FF4500", "#FF00FF"],
-                'colour_explanation': "The Good Colours listed are cool-toned and muted, and should be complementary to your colouring. The Bad Colours listed are warm-toned and bright, and may not be as complementary to your colouring. However, it\'s important to note that these are just guidelines, and you should ultimately wear whatever colours make you feel confident and beautiful!"
+                "season": "Light Summer"
             }"""
         },
         {
@@ -139,10 +188,7 @@ def get_seasonal_colour_pallette(eye_colour, hair_colour, skin_tone, vein_colour
             "role": "assistant",
             "content": """{
                 "season_explanation": "Based on the information you provided, it sounds like you have cool-toned features, with brown eyes, blonde hair, fair skin, and blue veins. This would suggest that you are a cool-toned individual, and I would recommend exploring the `Winter` and `Summer` seasons. Based on your fair skin and blue veins, I would recommend the `Light Spring` sub-season within the Spring season. `Light Spring` individuals have a warm undertone, and typically have light blonde, light brown, or strawberry blonde hair, fair skin, and brown or green eyes.",
-                "season": "Light Sprint 💐",
-                "good_colours": ["#F5F5D9", "#F5E8D9", "#F5E1D5", "#F5D5D5", "#F5D5E1", "#F5D5E6", "#F5D5E0", "#F5D5D0", "#F5D5CF", "#F5D5C3", "#F5D5B8", "#F5D5AD", "#F5D5A3", "#F5D599", "#F5D58F", "#F5D585", "#F5D57B", "#F5D571", "#F5D566", "#F5D55B", "#F5D551", "#F5D53B", "#F5D531"],
-                "bad_colours": ["#FF0000", "#FFA500", "#FFFF00", "#008000", "#0000FF", "#800080", "#000000", "#FFFFFF", "#FFC0CB", "#FF69B4", "#FFD700", "#4B0082", "#800000", "#808080", "#C0C0C0", "#800080", "#00FFFF", "#00FF00", "#FFFF99", "#FFB6C1", "#FF6347", "#6A5ACD", "#8A2BE2", "#FF4500", "#FF00FF"],
-                'colour_explanation': "The Good Colours listed are warm-toned and muted, and should be complementary to your colouring. The Bad Colours listed are cool-toned and bright, and may not be as complementary to your colouring. However, it's important to note that these are just guidelines, and you should ultimately wear whatever colours make you feel confident and beautiful!"
+                "season": "Light Spring"
             }"""
         },
         {
@@ -165,12 +211,23 @@ def get_seasonal_colour_pallette(eye_colour, hair_colour, skin_tone, vein_colour
     return colour_analysis
 
 color_analysis = get_seasonal_colour_pallette(eye_colour, hair_colour, skin_tone, vein_colour)
+color_palette = COLOUR_PALETTES[color_analysis['season']]
+
+def add_emoji_to_season(season):
+    if 'Winter' in season:
+        return season + ' ❄️'
+    if 'Spring' in season:
+        return season + ' 💐'
+    if 'Summer' in season:
+        return season + ' ☀️'
+    if 'Autumn' in season:
+        return season + ' 🍂'
 
 st.markdown(
     f"""
 ## Your Seasonal Colour Palette 🌈
 
-You are a **{color_analysis['season']}**!
+You are a **{add_emoji_to_season(color_analysis['season'])}**!
     """
 )
 
@@ -180,20 +237,21 @@ st.expander('Season Explanation').markdown(
 
 st.markdown('### Colour Palette')
 
-st.expander('Palette Explanation').markdown(
-    f"""{color_analysis['colour_explanation']}"""
-)
+with st.expander('Palette Explanation', expanded=True):
+    st.markdown(
+        f"""{color_palette['colour_explanation']}"""
+    )
 
 col1, col2 = st.columns(2)
 
 with col1:
     st.markdown('#### Good Colours')
-    for colour in color_analysis['good_colours']:
+    for colour in set(color_palette['good_colours']):
         st.markdown(f'<div style="background-color: {colour}; padding: 10px; margin: 5px; border-radius: 5px;"></div>', unsafe_allow_html=True)
 
 with col2:
     st.markdown('#### Bad Colours')
-    for colour in color_analysis['bad_colours']:
+    for colour in set(color_palette['bad_colours']):
         st.markdown(f'<div style="background-color: {colour}; padding: 10px; margin: 5px; border-radius: 5px;"></div>', unsafe_allow_html=True)
 
 st.caption("Want to say thanks? \n[Buy me a coffee ☕](https://www.buymeacoffee.com/brydon)")
