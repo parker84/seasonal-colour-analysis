@@ -1,6 +1,7 @@
 from groq import Groq
 import streamlit as st
 from decouple import config
+import json
 import logging, coloredlogs
 logger = logging.getLogger(__name__)
 coloredlogs.install(level=config('LOG_LEVEL', 'INFO'), logger=logger)
@@ -53,14 +54,14 @@ You are an expert at doing seasonal colour analysis for people. They will tell y
 Here's an example of what your output will look like:
 "{
     "season_explanation": "You are a Light Summer. Your best colours are light and cool, like light blues, light pinks, and light purples. Avoid dark and warm colours like dark reds, oranges, and yellows.",
-    "season": "Summer",
-    "sub_season": "Light Summer",
+    "season": "Light Summer",
     "good_colours: ["#f0f8ff", "#b0e0e6", "#87cefa", "#4682b4", "#5f9ea0", "#7b68ee", "#6a5acd", "#483d8b"],
     "bad_colours": ["#ff0000", "#ff4500", "#ff8c00", "#ffd700", "#adff2f", "#32cd32", "#008000", "#006400"],
     'colour_explanation": "Your eye colour is blue, your hair colour is blonde, your skin tone is fair, and your vein colour is blue. This makes you a Light Summer."
 }"
 
 It's important you output the information in the correct python dict format (so I can call eval() on the output without errror), as shown above, or everything will break.
+Ensure your output has these exact keys in the dictionary also.
 """
 
 def get_user_input_messages(eye_colour, hair_colour, skin_tone, vein_colour):
@@ -104,6 +105,7 @@ Do not return anything except the cleaned json (not text before or after the jso
     clean_dict = eval(text) 
 
     logger.info(f'Cleaned up json text ✅')
+    logger.info(json.dumps(clean_dict, indent=4))
     return clean_dict
 
 @st.cache_data()
@@ -122,8 +124,7 @@ def get_seasonal_colour_pallette(eye_colour, hair_colour, skin_tone, vein_colour
             "role": "assistant",
             "content": """{
                 "season_explanation": "Based on the information you provided, it sounds like you have cool-toned features, with blue eyes, blonde hair, fair skin, and blue veins. This would suggest that you are a cool-toned individual, and I would recommend exploring the "Winter" and "Summer" seasons.\n\nBased on your fair skin and blue veins, I would recommend the "Light Summer" sub-season within the Summer season. "Light Summer" individuals have a muted, soft, and delicate colouring, with a cool undertone. They typically have light blonde, light brown, or strawberry blonde hair, fair skin, and blue or green eyes.",
-                "season": "Summer",
-                "sub_season": "Light Summer",
+                "season": "Light Summer",
                 "good_colours": ["#f0f8ff", "#b0e0e6", "#87cefa", "#4682b4", "#5f9ea0", "#7b68ee", "#6a5acd", "#483d8b"],
                 "bad_colours": ["#ff0000", "#ff4500", "#ff8c00", "#ffd700", "#adff2f", "#32cd32", "#008000", "#006400"],
                 'colour_explanation': "The "Good Colours" listed are cool-toned and muted, and should be complementary to your colouring. The "Bad Colours" listed are warm-toned and bright, and may not be as complementary to your colouring. However, it\'s important to note that these are just guidelines, and you should ultimately wear whatever colours make you feel confident and beautiful!"
@@ -154,7 +155,7 @@ st.markdown(
     f"""
 ## Your Seasonal Colour Palette 🌈
 
-You are a **{color_analysis['sub_season']}**!
+You are a **{color_analysis['season']}**!
     """
 )
 
