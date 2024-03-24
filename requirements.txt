@@ -1,3 +1,4 @@
 streamlit
 groq
 python-decouple
+coloredlogs
