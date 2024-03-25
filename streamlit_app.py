@@ -76,7 +76,6 @@ COLOUR_PALETTES = {
     }
 }
 
-# TODO: deal with white better except for deep / cool winter
 
 st.set_page_config(
     page_title='Seasonal Colour Analysis',
@@ -89,9 +88,9 @@ st.caption('Enter your information and learn about your seasonal colour palette!
 
 with st.form(key='my_form'):
     eye_colour = st.selectbox('What is your eye colour? 👀', ['Blue', 'Green', 'Brown', 'Hazel', 'Amber', 'Gray'], index=None)
-    hair_colour = st.selectbox('What is your hair colour? 💇‍♀️', ['Blonde', 'Brown', 'Black', 'Red', 'Gray', 'White'], index=None)
+    hair_colour = st.selectbox('What is your hair colour? 💇‍♀️', ['Blonde', 'Brown', 'Black', 'Red', 'Gray', 'White', 'Strawberry Blonde'], index=None)
     skin_tone = st.selectbox('What is your skin tone? 🎨', ['Fair', 'Light', 'Medium', 'Olive', 'Tan', 'Dark'], index=None)
-    vein_colour = st.selectbox('What is the colour of your veins? 🩸', ['Blue', 'Green', 'Purple'], index=None)
+    vein_colour = st.selectbox('What is the colour of your veins? 🩸', ['Blue', 'Green', 'Purple', 'Neutral'], index=None)
     with st.expander('Get more specific (optional)'):
         eye_colour_adv = st.color_picker('Eye Colour', value='#000000')
         hair_colour_adv = st.color_picker('Hair Colour', value='#000000')
