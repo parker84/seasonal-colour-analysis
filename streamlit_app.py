@@ -257,12 +257,22 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.markdown('#### Good Colours')
+    cols = st.columns(3)
+    st.write('<div style="display: grid; grid-template-columns: repeat(3, 50px); gap: 5px;">', unsafe_allow_html=True)
+    i = 0
     for colour in set(color_palette['good_colours']):
-        st.markdown(f'<div style="background-color: {colour}; padding: 10px; margin: 5px; border-radius: 5px;"></div>', unsafe_allow_html=True)
+        with cols[i % 3]:
+            st.markdown(f'<div style="background-color: {colour}; padding: 10px; margin: 5px; border-radius: 5px;"></div>', unsafe_allow_html=True)
+        i += 1
 
 with col2:
     st.markdown('#### Bad Colours')
+    cols = st.columns(3)
+    st.write('<div style="display: grid; grid-template-columns: repeat(3, 50px); gap: 5px;">', unsafe_allow_html=True)
+    i = 0
     for colour in set(color_palette['bad_colours']):
-        st.markdown(f'<div style="background-color: {colour}; padding: 10px; margin: 5px; border-radius: 5px;"></div>', unsafe_allow_html=True)
+        with cols[i % 3]:
+            st.markdown(f'<div style="background-color: {colour}; padding: 10px; margin: 5px; border-radius: 5px;"></div>', unsafe_allow_html=True)
+        i += 1
 
 st.caption("Want to say thanks? \n[Buy me a coffee ☕](https://www.buymeacoffee.com/brydon)")
